@@ -24,10 +24,12 @@ const db = knex({
 // middleware
 app.use(bodyParser.json());
 app.use(cors());
+// endpoints
 app.get('/',(req,res)=>{ res.status(200).send('success');});
 app.post('/signin', (req, res)=>{ signin.handleSignin(req, res, db, bcrypt)});
 app.post('/register', (req, res)=>{ register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req,res)=>{ profile.handleProfile(req, res, db)});
 app.put('/imagen', (req, res)=>{ imagen.handleImagen(req,res,db)});
 app.post('/imagenurl', (req, res)=>{ imagen.handleApiCall(req,res)});
-app.listen(3000, ()=>{console.log('app esta corriendo en el pruerto 3000');});
+app.listen(process.env.PORT || 3000, ()=>{
+  console.log(`app esta corriendo en el puerto ${process.env.PORT}`);});
